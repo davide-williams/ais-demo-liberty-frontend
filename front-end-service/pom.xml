@@ -6,7 +6,7 @@
 	<packaging>war</packaging>
 
 	<build>
-		<finalName>ais-demo-app</finalName>
+		<finalName>ais-demo-app-${project.version}</finalName>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>

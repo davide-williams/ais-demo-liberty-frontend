@@ -22,7 +22,7 @@ echo ' <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.
                                 <configuration>
                                         <failOnMissingWebXml>false</failOnMissingWebXml>
                                 </configuration>
-                        </plugin>
+                        </plugin>                      
                 </plugins>
         </build>
 
@@ -90,6 +90,6 @@ echo ' <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.
                         <artifactId>quarkus-junit4</artifactId>
                         <version>0.22.0</version>
                         <scope>test</scope>
-                </dependency>
+                </dependency>                
         </dependencies>
 </project> ' > pom.xml
