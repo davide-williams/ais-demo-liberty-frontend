@@ -6,7 +6,7 @@ echo ' <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.
         <packaging>war</packaging>
 
         <build>
-                <finalName>ais-demo-app</finalName>
+                <finalName>ais-demo-app-'$BUILD_NUMBER'</finalName>
                 <plugins>
                         <plugin>
                                 <artifactId>maven-compiler-plugin</artifactId>
