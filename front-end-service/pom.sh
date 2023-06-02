@@ -2,7 +2,7 @@ echo ' <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.
         <modelVersion>4.0.0</modelVersion>
         <groupId>gov.ais.demo</groupId>
         <artifactId>front-end-service</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>'+$BUILD_NUMBER+'</version>
         <packaging>war</packaging>
 
         <build>
