@@ -4,7 +4,6 @@ echo ' <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.
         <artifactId>front-end-service</artifactId>
         <version>'$BUILD_NUMBER'</version>
         <packaging>war</packaging>
-
         <build>
                 <finalName>'$APP_NAME'</finalName>
                 <plugins>
