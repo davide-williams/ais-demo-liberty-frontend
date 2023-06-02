@@ -92,4 +92,4 @@ echo ' <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.
                         <scope>test</scope>
                 </dependency>
         </dependencies>
-</project> ' > data.txt
+</project> ' > pom.xml
