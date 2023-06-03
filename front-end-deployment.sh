@@ -1,4 +1,5 @@
-echo ' kind: ConfigMap
+cat <<EOF |oc apply -f - 
+kind: ConfigMap
 apiVersion: v1
 metadata:
   name: aid-demo-frontend-configmap
@@ -47,7 +48,7 @@ spec:
     spec:
       containers:
         - name: ais-demo-frontend-app-container
-          image: image-registry.openshift-image-registry.svc:5000/ais-service-demo/'$APP_NAME':'$BUILD_NUMBER'
+          image: image-registry.openshift-image-registry.svc:5000/ais-service-demo/$APP_NAME:$BUILD_NUMBER
           imagePullPolicy: IfNotPresent
           envFrom:
           - configMapRef:
@@ -63,4 +64,4 @@ spec:
               memory: 512Mi
             requests:
               cpu: 250m
-              memory: 128Mi ' > front-end-deployment.yaml
+              memory: 128Mi
