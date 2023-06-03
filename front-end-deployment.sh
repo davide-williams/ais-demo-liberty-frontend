@@ -3,6 +3,7 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: aid-demo-frontend-configmap
+  namespace: ais-service-demo
 data:
   # Configuration values can be set as key-value properties
   BES_ODM_SERVER: "http://odm-eval-ibm-odm-dev:9060"
@@ -15,6 +16,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: ais-demo-frontend
+  namespace: ais-service-demo
   labels:
     app: ais-demo-frontend
 spec:
@@ -33,6 +35,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: ais-service-demo
   name: ais-demo-frontend-app
   labels:
     app: ais-demo-frontend-app
