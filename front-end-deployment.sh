@@ -15,7 +15,7 @@ data:
 apiVersion: v1
 kind: Service
 metadata:
-  name: ais-demo-frontend
+  name: $SVC_NAME
   namespace: ais-service-demo
   labels:
     app: ais-demo-frontend
