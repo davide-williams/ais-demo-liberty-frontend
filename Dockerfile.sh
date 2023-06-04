@@ -1,4 +1,4 @@
-echo ' FROM icr.io/appcafe/open-liberty:kernel-slim-java11-openj9-ubi as builder
+echo 'FROM icr.io/appcafe/open-liberty:23.0.0.3-full-java8-ibmjava-ubi as builder
 
 FROM builder as build1
 
