@@ -8,7 +8,7 @@ data:
   # Configuration values can be set as key-value properties
   BES_ODM_SERVER: "http://odm-eval-ibm-odm-dev:9060"
   BES_ODM_RULESET: bes_deployment/bes_decision_service
-  BES_MQ_SERVER: ais-demo-ibm-mq
+  BES_MQ_SERVER: ais-demo-qmgr-ibm-mq
   BES_MQ_PORT: "1414"
   BES_MQ_QMGR: DEMO_QMGR
 ---
