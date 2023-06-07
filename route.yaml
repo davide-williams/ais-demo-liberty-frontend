@@ -1,0 +1,18 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: ais-demo-frontend
+  name: ais-demo-frontend
+  namespace: ais-service-demo
+spec:
+  host: ais-demo-frontend-ais-service-demo.apps.ais-ocp-nonprod.cov.virginia.gov
+  port:
+    targetPort: 9443
+  tls:
+    termination: passthrough
+  to:
+    kind: Service
+    name: ais-demo-frontend
+    weight: 100
+  wildcardPolicy: None
