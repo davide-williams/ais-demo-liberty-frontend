@@ -13,7 +13,8 @@ pipeline {
     stage('Application Build') {
       steps{
        dir("${APP_BUILD_PATH}"){ 
-        sh pwd    
+        sh "mvn --version"
+        sh "pwd"
        }
       }
     }
