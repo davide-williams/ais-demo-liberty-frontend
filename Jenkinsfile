@@ -10,7 +10,7 @@ pipeline {
       APP_IMAGE = "image-registry.openshift-image-registry.svc:5000/${NAMESPACE}/${APP_NAME}"
    }
   stages {
-    stage('Image Build') {
+    stage('Application Build') {
       steps{
       sh pwd    
       }
