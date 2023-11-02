@@ -13,7 +13,6 @@ pipeline {
     stage('Image Build') {
       steps {
         echo 'Building'    
-        sh 'podman build -f Dockerfile --tag image-registry.openshift-image-registry.svc:5000/ace/aceapp:$'
         sh "podman build --no-cache -f Dockerfile --tag ${APP_IMAGE}:"+env.BUILD_NUMBER
       }
     }
