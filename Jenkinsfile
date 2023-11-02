@@ -11,9 +11,14 @@ pipeline {
    }
   stages {
     stage('Image Build') {
+      steps{
+      sh pwd    
+      }
+    }
+    stage('Image Build') {
       steps {
         echo 'Building'    
-        sh "podman build --no-cache -f Dockerfile --tag ${APP_IMAGE}:"+env.BUILD_NUMBER
+    //    sh "podman build --no-cache -f Dockerfile --tag ${APP_IMAGE}:"+env.BUILD_NUMBER
       }
     }
   }
