@@ -31,6 +31,6 @@
         <user name="admin" password="admin"/>
     </basicRegistry>
 
-<webApplication contextRoot="ais-demo-app" id="frontend_app" location="ais-demo-app.war" name="frontend_app"/>
+  <webApplication contextRoot="ais-demo-app" id="frontend_app" location="ais-demo-app.war" name="frontend_app"/>
   
 </server>
