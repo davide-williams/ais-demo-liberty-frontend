@@ -20,6 +20,11 @@ pipeline {
            def pom = readMavenPom file: 'pom.xml'
            echo "pom->appName: " +pom.build.finalName
            echo "pom->version: " +pom.version
+           pom.build.finalName = ${APP_NAME}+"-"+env.BUILD_NUMBER
+           pom.version = env.BUILD_NUMBER
+           echo 
+           echo "pom->appName: " +pom.build.finalName
+           echo "pom->version: " +pom.version
          }
         }
       }
