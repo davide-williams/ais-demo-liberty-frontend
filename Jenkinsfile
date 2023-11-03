@@ -54,8 +54,8 @@ pipeline {
     stage('Deploy OCP application') {
       steps{
         script{
-         dir("${APP_BUILD_PATH}"){ 
-           def deploymentYaml = readYaml file: "../front-end-deployment.yaml"
+         dir("${WORKSPACE}"){ 
+           def deploymentYaml = readYaml file: "front-end-deployment.yaml"
            echo "deployment yaml: " + deploymentYaml
          
          }
