@@ -15,6 +15,7 @@ pipeline {
        dir("${APP_BUILD_PATH}"){ 
         sh "mvn --version"
         sh "pwd"
+        def pom = readMavenPom file: 'pom.xml'
        }
       }
     }
