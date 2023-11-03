@@ -12,8 +12,8 @@ pipeline {
   stages {
     
     stage('Application Build') {
-      script{
-        steps{
+      steps{
+        script{
          dir("${APP_BUILD_PATH}"){ 
            sh "mvn --version"
            sh "pwd"
