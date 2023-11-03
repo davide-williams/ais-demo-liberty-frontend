@@ -55,6 +55,8 @@ pipeline {
       steps{
         script{
          dir("${WORKSPACE}"){ 
+           sh "oc apply -f front-end-configmap.yaml"
+           sh "oc apply -f front-end-service.yaml"
            def deploymentYaml = readYaml file: "front-end-deployment.yaml"
            echo "deployment yaml: " + deploymentYaml
            echo "image: "+deploymentYaml.spec.spec
