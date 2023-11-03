@@ -48,7 +48,7 @@ pipeline {
     stage('Pushing to Internal Registry') {
       steps {
         echo 'Pushing'
-        sh 'podman push ${APP_IMAGE}:'+env.BUILD_NUMBER' --tls-verify=false'
+        sh "podman push ${APP_IMAGE}:"+env.BUILD_NUMBER+ " --tls-verify=false"
       }
     }
   }
