@@ -11,11 +11,13 @@ pipeline {
    }
   stages {
     stage('Application Build') {
-      steps{
-       dir("${APP_BUILD_PATH}"){ 
-        sh "mvn --version"
-        sh "pwd"
-        def pom = readMavenPom file: 'pom.xml'
+      script{
+        steps{
+         dir("${APP_BUILD_PATH}"){ 
+           sh "mvn --version"
+           sh "pwd"
+           def pom = readMavenPom file: 'pom.xml'
+         }
        }
       }
     }
