@@ -18,7 +18,7 @@ pipeline {
            sh "mvn --version"
            sh "pwd"
            def pom = readMavenPom file: 'pom.xml'
-           echo "pom: " +pom.project.artifactId
+           echo "pom: " +poms.artifactId
          }
         }
       }
