@@ -16,7 +16,7 @@ pipeline {
         script{
          dir("${APP_BUILD_PATH}"){ 
            sh "mvn --version"
-           sh "pwd"
+           echo "--- Update maven POM.xml"
            def pom = readMavenPom file: 'pom.xml'
            echo "pom->appName: " +pom.build.finalName
            echo "pom->version: " +pom.version
@@ -25,6 +25,9 @@ pipeline {
            echo "after change"
            echo "pom->appName: " +pom.build.finalName
            echo "pom->version: " +pom.version
+           writeMavenPom model: pom
+           
+           sh "mvn -X clean package"
          }
         }
       }
