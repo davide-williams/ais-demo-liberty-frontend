@@ -51,6 +51,19 @@ pipeline {
         sh "podman push ${APP_IMAGE}:"+env.BUILD_NUMBER+ " --tls-verify=false"
       }
     }
+    stage('Application Build') {
+      steps{
+        script{
+         dir("${APP_BUILD_PATH}"){ 
+           def deploymentYaml = readYaml file: "front-end-deployment.yaml"
+           echo "deployment yaml: " + deploymentYaml
+         
+         }
+        }
+      }
+    }
+         
+    
   }
   post {
          // Clean after build
