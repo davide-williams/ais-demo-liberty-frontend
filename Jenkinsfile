@@ -55,7 +55,7 @@ pipeline {
       steps{
         script{
          dir("${APP_BUILD_PATH}"){ 
-           def deploymentYaml = readYaml file: "front-end-deployment.yaml"
+           def deploymentYaml = readYaml file: "../front-end-deployment.yaml"
            echo "deployment yaml: " + deploymentYaml
          
          }
