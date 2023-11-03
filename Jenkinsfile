@@ -60,7 +60,8 @@ pipeline {
            def deploymentYaml = readYaml file: "front-end-deployment.yaml"
            echo "deployment yaml: " + deploymentYaml
            echo "image: "+deploymentYaml.spec.template.spec.containers[0].image
-         
+           deploymentYaml.spec.template.spec.containers[0].image = "${APP_IMAGE}:"+env.BUILD_NUMBER
+           echo "image after update: "+deploymentYaml.spec.template.spec.containers[0].image
          }
         }
       }
