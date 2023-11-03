@@ -59,7 +59,7 @@ pipeline {
            sh "oc apply -f front-end-service.yaml"
            def deploymentYaml = readYaml file: "front-end-deployment.yaml"
            echo "deployment yaml: " + deploymentYaml
-           echo "image: "+deploymentYaml.apiVersion
+           echo "image: "+deploymentYaml.spec.replicas
          
          }
         }
