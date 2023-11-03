@@ -57,6 +57,7 @@ pipeline {
          dir("${WORKSPACE}"){ 
            def deploymentYaml = readYaml file: "front-end-deployment.yaml"
            echo "deployment yaml: " + deploymentYaml
+           echo "image: "+deploymentYaml.spec.spec.containers[0].image
          
          }
         }
