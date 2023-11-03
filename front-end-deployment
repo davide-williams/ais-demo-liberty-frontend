@@ -1,4 +1,3 @@
-cat <<EOF |oc apply -f - 
 kind: ConfigMap
 apiVersion: v1
 metadata:
@@ -15,7 +14,7 @@ data:
 apiVersion: v1
 kind: Service
 metadata:
-  name: $SVC_NAME
+  name: ais-demo-frontend
   namespace: ais-service-demo
   labels:
     app: ais-demo-frontend
