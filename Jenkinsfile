@@ -22,7 +22,7 @@ pipeline {
            echo "pom->version: " +pom.version
            pom.build.finalName = "${APP_NAME}"+"-"+env.BUILD_NUMBER
            pom.version = env.BUILD_NUMBER
-           echo "after change"
+           echo "POM.xml after change"
            echo "pom->appName: " +pom.build.finalName
            echo "pom->version: " +pom.version
            writeMavenPom model: pom
@@ -35,10 +35,30 @@ pipeline {
     stage('Image Build') {
       steps {
         echo 'Building'    
-    //    sh "podman build --no-cache -f Dockerfile --tag ${APP_IMAGE}:"+env.BUILD_NUMBER
+        sh "podman build --no-cache -f Dockerfile --tag ${APP_IMAGE}:"+env.BUILD_NUMBER
       }
     }
-    
   }
+  post {
+         // Clean after build
+         always {
+            echo 'Cleaning up after build...'
+             cleanWs(cleanWhenNotBuilt: false,
+                     deleteDirs: true,
+                     disableDeferredWipeout: true,
+                     notFailBuild: true,
+                     patterns: [[pattern: '.gitignore', type: 'INCLUDE'],
+                                [pattern: '.propsfile', type: 'EXCLUDE']])
+         }
+         success {  
+             echo 'Sending successful build message'              
+        //     mail body: "<b>BUILD SUCCESS</b><br><br>Project: ${env.JOB_NAME}<br><br>Build Number: ${env.BUILD_NUMBER} <br><br> URL of build: <a href=\"${env.BUILD_URL}\">${env.BUILD_URL}</a>", charset: 'UTF-8', from: 'ais-jenkis<no-reply@cov.virginia.gov>', mimeType: 'text/html', subject: "Jenkins BUILD SUCCESS: ${env.JOB_NAME}", to: "${env.JENKINS_ADMINS_EMAIL}";
+         }  
+         failure {  
+             echo 'Sending failure build message'  
+        //     mail body: "<b>BUILD FAILURE</b><br><br>Project: ${env.JOB_NAME}<br><br>Build Number: ${env.BUILD_NUMBER} <br><br> URL of build: <a href=\"${env.BUILD_URL}\">${env.BUILD_URL}</a>", charset: 'UTF-8', from: 'ais-jenkis<no-reply@cov.virginia.gov>', mimeType: 'text/html', subject: "Jenkins BUILD FAILURE: ${env.JOB_NAME}", to: "${env.JENKINS_ADMINS_EMAIL}";
+         }   
+     }
+  
   
  }
