@@ -58,10 +58,13 @@ pipeline {
            sh "oc apply -f front-end-configmap.yaml"
            sh "oc apply -f front-end-service.yaml"
            def deploymentYaml = readYaml file: "front-end-deployment.yaml"
+           
            echo "deployment yaml: " + deploymentYaml
            echo "image: "+deploymentYaml.spec.template.spec.containers[0].image
            deploymentYaml.spec.template.spec.containers[0].image = "${APP_IMAGE}:"+env.BUILD_NUMBER
            echo "image after update: "+deploymentYaml.spec.template.spec.containers[0].image
+           
+           writeYaml file: "front-end-deployment.yaml", data: deploymentYaml, overwrite: true
          }
         }
       }
