@@ -11,7 +11,7 @@ pipeline {
    }
   stages {
     
-    stage('Application Build') {
+    stage('Build Java Application') {
       steps{
         script{
          dir("${APP_BUILD_PATH}"){ 
@@ -32,31 +32,30 @@ pipeline {
         }
       }
     }
-    stage('Image Build') {
+    stage('Build Docker Image') {
       steps {
-        echo 'Building'    
+        echo 'Building image'    
         sh "podman build --no-cache -f Dockerfile --tag ${APP_IMAGE}:"+env.BUILD_NUMBER
       }
     }
     
-    stage('Authentication to Internal Registry'){
+    stage('Authenticate to Internal OCP Registry'){
         steps{
             echo 'Authenticating to Openshift Registry'
             sh 'podman login -u jenkins -p $(oc whoami -t) image-registry.openshift-image-registry.svc:5000 --tls-verify=false'
         }
     }
-    stage('Pushing to Internal Registry') {
+    stage('Push to Internal OCP Registry') {
       steps {
-        echo 'Pushing'
+        echo 'Pushing image'
         sh "podman push ${APP_IMAGE}:"+env.BUILD_NUMBER+ " --tls-verify=false"
       }
     }
-    stage('Deploy OCP application') {
+    stage('Build OCP application') {
       steps{
         script{
          dir("${WORKSPACE}"){ 
-           sh "oc apply -f front-end-configmap.yaml"
-           sh "oc apply -f front-end-service.yaml"
+           
            def deploymentYaml = readYaml file: "front-end-deployment.yaml"
            
            echo "deployment yaml: " + deploymentYaml
@@ -69,7 +68,19 @@ pipeline {
         }
       }
     }
-         
+    
+    stage('Deploy OCP application') {
+      steps {
+       dir("${WORKSPACE}"){ 
+         echo '---rolling out application'
+         sh "oc apply -f front-end-configmap.yaml"
+         sh "oc apply -f front-end-service.yaml"
+	     sh "oc apply -f front-end-deployment.yaml"
+	     echo '---testing application ...'
+	     sh "oc rollout status -n ${NAMESPACE} deployment/${APP_NAME} --timeout=1m"
+       }
+      }
+    }
     
   }
   post {
