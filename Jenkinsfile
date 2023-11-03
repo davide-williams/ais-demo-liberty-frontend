@@ -51,7 +51,7 @@ pipeline {
         sh "podman push ${APP_IMAGE}:"+env.BUILD_NUMBER+ " --tls-verify=false"
       }
     }
-    stage('Application Build') {
+    stage('Deploy OCP application') {
       steps{
         script{
          dir("${APP_BUILD_PATH}"){ 
