@@ -38,6 +38,19 @@ pipeline {
         sh "podman build --no-cache -f Dockerfile --tag ${APP_IMAGE}:"+env.BUILD_NUMBER
       }
     }
+    
+    stage('Authentication to Internal Registry'){
+        steps{
+            echo 'Authenticating to Openshift Registry'
+            sh 'podman login -u jenkins -p $(oc whoami -t) image-registry.openshift-image-registry.svc:5000 --tls-verify=false'
+        }
+    }
+    stage('Pushing to Internal Registry') {
+      steps {
+        echo 'Pushing'
+        sh 'podman push ${APP_IMAGE}:'+env.BUILD_NUMBER' --tls-verify=false'
+      }
+    }
   }
   post {
          // Clean after build
