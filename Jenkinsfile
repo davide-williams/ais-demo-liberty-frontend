@@ -27,7 +27,7 @@ pipeline {
            echo "pom->version: " +pom.version
            writeMavenPom model: pom
            
-           sh "mvn -X clean package"
+           sh "mvn clean package"
          }
         }
       }
