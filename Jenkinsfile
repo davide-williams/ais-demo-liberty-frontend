@@ -10,6 +10,7 @@ pipeline {
       APP_IMAGE = "image-registry.openshift-image-registry.svc:5000/${NAMESPACE}/${APP_NAME}"
    }
   stages {
+    
     stage('Application Build') {
       script{
         steps{
@@ -18,7 +19,7 @@ pipeline {
            sh "pwd"
            def pom = readMavenPom file: 'pom.xml'
          }
-       }
+        }
       }
     }
     stage('Image Build') {
@@ -27,5 +28,7 @@ pipeline {
     //    sh "podman build --no-cache -f Dockerfile --tag ${APP_IMAGE}:"+env.BUILD_NUMBER
       }
     }
+    
   }
+  
  }
