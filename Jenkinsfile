@@ -34,8 +34,10 @@ pipeline {
     }
     stage('Build Docker Image') {
       steps {
-        echo 'Building image'    
-        sh "podman build --no-cache -f Dockerfile --tag ${APP_IMAGE}:"+env.BUILD_NUMBER
+        dir("${APP_BUILD_PATH}"){ 
+          echo 'Building image'    
+          sh "podman build --no-cache -f Dockerfile --tag ${APP_IMAGE}:"+env.BUILD_NUMBER
+        }
       }
     }
     
