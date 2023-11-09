@@ -6,6 +6,7 @@ pipeline {
       NAMESPACE = 'ais-service-demo'
       APP_NAME = 'ais-demo-frontend-app'
       APP_SVC_NAME = 'ais-demo-frontend-app'
+      EMAIL_RECIPENT ='DavidE.Williams@vita.virginia.gov'
       APP_BUILD_PATH = "${WORKSPACE}/front-end-service"
       APP_IMAGE = "image-registry.openshift-image-registry.svc:5000/${NAMESPACE}/${APP_NAME}"
    }
