@@ -16,4 +16,4 @@ spec:
     protocol: TCP
     targetPort: 9443
   selector:
-    app: ais-demo-frontend-app
+    app: ais-demo-liberty

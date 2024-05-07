@@ -2,21 +2,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: ais-service-demo
-  name: ais-demo-frontend-app
+  name: ais-demo-liberty
   labels:
-    app: ais-demo-frontend-app
+    app: ais-demo-liberty
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ais-demo-frontend-app
+      app: ais-demo-liberty
   template:
     metadata:
       labels:
-        app: ais-demo-frontend-app
+        app: ais-demo-liberty
     spec:
       containers:
-        - name: ais-demo-frontend-app-container
+        - name: ais-demo-liberty-container
           image: image-registry.openshift-image-registry.svc:5000/ais-service-demo/$APP_NAME:$BUILD_NUMBER
           imagePullPolicy: IfNotPresent
           envFrom:
