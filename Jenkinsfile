@@ -5,6 +5,7 @@ pipeline {
   environment{
       NAMESPACE = 'ais-service-demo'
       APP_NAME = 'ais-demo-frontend-app'
+      DEPLOYMENT_NAME='ais-demo-liberty'
       APP_SVC_NAME = 'ais-demo-frontend-app'
       EMAIL_RECIPENT ='DavidE.Williams@vita.virginia.gov'
       APP_BUILD_PATH = "${WORKSPACE}/front-end-service"
@@ -78,7 +79,7 @@ pipeline {
          sh "oc apply -f front-end-service.yaml"
 	     sh "oc apply -f front-end-deployment.yaml"
 	     echo '---testing application ...'
-	     sh "oc rollout status -n ${NAMESPACE} deployment/${APP_NAME} --timeout=1m"
+	     sh "oc rollout status -n ${NAMESPACE} deployment/${DEPLOYMENT_NAME} --timeout=1m"
        }
       }
     }
