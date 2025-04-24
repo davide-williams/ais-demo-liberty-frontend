@@ -1,4 +1,4 @@
-FROM icr.io/appcafe/open-liberty:23.0.0.10-full-java8-ibmjava-ubi as builder
+FROM icr.io/appcafe/open-liberty:23.0.0.12-full-java8-ibmjava-ubi as builder
 
 FROM builder as build1
 
