@@ -1,7 +1,9 @@
 pipeline {
+	
   agent {
      label 'OCPNonProdAgent'
-   }  
+   }
+     
   environment{
       NAMESPACE = 'ais-service-demo'
       APP_NAME = 'ais-demo-frontend-app'
