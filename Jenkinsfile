@@ -53,7 +53,7 @@ pipeline {
         sh "podman push ${APP_IMAGE}:"+env.BUILD_NUMBER+ " --tls-verify=false"
       }
     }
-    stage('Build OCP application') {
+    stage('Build OCP deployment') {
       steps{
         script{
          dir("${WORKSPACE}"){ 
@@ -83,6 +83,24 @@ pipeline {
        }
       }
     }
+    
+    stage('Test OCP application') {
+            steps {
+                script {
+                    def attempt = 0
+                    def max_attempts = 5
+                    retry(max_attempts) {
+                        attempt = attempt+1
+                        println "----[INFO] Attempting to connect to demo app, will try for a maximum of ${max_attempts} times and sleep for 30 seconds in between"
+                        sleep(time: 30, unit: 'SECONDS')
+                        httpRequest url: "https://ais-demo-frontend-ais-service-demo.apps.ais-ocp-nonprod.cov.virginia.gov/ais-demo-app/",
+                        validResponseCodes: '200',
+                        ignoreSslErrors: true,
+                        timeout: 10
+                    }
+                }
+            }
+        }
     
   }
   post {
