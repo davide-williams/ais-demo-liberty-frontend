@@ -2,7 +2,7 @@
 
 FROM icr.io/appcafe/open-liberty:25.0.0.1-full-java8-ibmjava-ubi as builder
 
-FROM builder as build1
+FROM builder as build
 
 COPY --chown=1001:0 /config/server.xml /config/server.xml
 
