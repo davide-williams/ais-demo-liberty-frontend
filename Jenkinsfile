@@ -55,7 +55,7 @@ pipeline {
         sh "podman push ${APP_IMAGE}:"+env.BUILD_NUMBER+ " --tls-verify=false"
       }
     }
-    stage('Build OCP deployment') {
+    stage('Configure OCP deployment') {
       steps{
         script{
          dir("${WORKSPACE}"){ 
@@ -73,7 +73,7 @@ pipeline {
       }
     }
     
-    stage('Deploy OCP application') {
+    stage('Deploy application on OCP') {
       steps {
        dir("${WORKSPACE}"){ 
          echo '---rolling out application'
