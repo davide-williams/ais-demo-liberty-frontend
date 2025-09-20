@@ -82,7 +82,7 @@ $(document).ready(
 
 								} else if (data.approved == false) {
 									$('#info-panel').attr('class','panel panel-warning');
-									$('#info-header').text('Rejected')
+									$('#info-header').text('Denied')
 									$('#info-text').html(format_json(data.response))
 								}
 							} else {
