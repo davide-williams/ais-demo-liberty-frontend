@@ -81,7 +81,7 @@ $(document).ready(
 									$('#info-text').html(format_json(data.response))
 
 								} else if (data.approved == false) {
-									$('#info-panel').attr('class','panel panel-warning');
+									$('#info-panel').attr('class','panel panel-danger');
 									$('#info-header').text('Denied')
 									$('#info-text').html(format_json(data.response))
 								}
