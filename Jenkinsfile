@@ -37,7 +37,7 @@ pipeline {
       }
     }
     
- /*   stage('OWASP Dependency-Check Vulnerabilities') {
+   stage('OWASP Dependency-Check Vulnerabilities') {
       steps {
 		script{
          dir("${APP_BUILD_PATH}"){ 
@@ -52,7 +52,7 @@ pipeline {
         }
       }
     }
- */
+ 
     
     stage('Build Container Image') {
       steps {
