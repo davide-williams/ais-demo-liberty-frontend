@@ -36,6 +36,22 @@ pipeline {
         }
       }
     }
+    
+    stage('OWASP Dependency-Check Vulnerabilities') {
+      steps {
+		script{
+         dir("${APP_BUILD_PATH}"){ 
+        	dependencyCheck additionalArguments: ''' 
+                    -o './'
+                    -s './'
+                    -f 'ALL' 
+                    --prettyPrint''', odcInstallation: 'OWASP Dependency-Check Vulnerabilities'
+        
+        	dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+          }
+        }
+      }
+    }
     stage('Build Container Image') {
       steps {
         echo 'Building image'    
