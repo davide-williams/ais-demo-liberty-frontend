@@ -45,7 +45,9 @@ pipeline {
                     -o './'
                     -s './'
                     -f 'ALL' 
-                    --prettyPrint''', odcInstallation: 'OWASP Dependency-Check Vulnerabilities', nvdCredentialsId: 'af32daf5-a542-4b4c-957a-e78a139be304'
+                    --prettyPrint''', 
+                    nvdCredentialsId: 'af32daf5-a542-4b4c-957a-e78a139be304',
+                    odcInstallation: 'OWASP Dependency-Check Vulnerabilities'
         
         	dependencyCheckPublisher pattern: 'dependency-check-report.xml'
           }
