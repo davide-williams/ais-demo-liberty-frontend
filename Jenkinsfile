@@ -45,6 +45,7 @@ pipeline {
                     -o './'
                     -s './'
                     -f 'ALL' 
+                     --disableKnownExploited 
                     --prettyPrint''', 
                     nvdCredentialsId: 'nvd-api-key-id',
                     odcInstallation: 'OWASP Dependency-Check Vulnerabilities',
