@@ -78,6 +78,10 @@ pipeline {
                       --output /output/trivy-report.html \\
                       myapp:${BUILD_NUMBER}
                 '''*/
+                //Run Trivy against new image
+                sh '''
+                trivy -d -f ${APP_IMAGE}:${BUILD_NUMBER}
+                '''
                 // Publish the HTML report (requires the Jenkins publishHTML plugin)
                 publishHTML(target: [
                     reportName: 'Trivy Scan Report',
