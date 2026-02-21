@@ -65,6 +65,36 @@ pipeline {
       }
     }
     
+     stage('Image Security Scan (Trivy)') {
+            steps {
+                // Run Trivy as a Docker container to scan the built image
+             /*   sh '''
+                    docker run --rm \\
+                      -v /var/run/docker.sock:/var/run/docker.sock \\
+                      -v ${WORKSPACE}:/output \\
+                      aquasec/trivy:latest image \\
+                      --format template \\
+                      --template "@/contrib/html.tpl" \\
+                      --output /output/trivy-report.html \\
+                      myapp:${BUILD_NUMBER}
+                '''*/
+                // Publish the HTML report (requires the Jenkins publishHTML plugin)
+                publishHTML(target: [
+                    reportName: 'Trivy Scan Report',
+                    reportDir: '.',
+                    reportFiles: 'trivy-report.html',
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true
+                ])
+            }
+        }
+    
+    
+    
+    
+    
+    
+    
     stage('Authenticate to Internal OCP Registry'){
         steps{
             echo 'Authenticating to Openshift Registry'

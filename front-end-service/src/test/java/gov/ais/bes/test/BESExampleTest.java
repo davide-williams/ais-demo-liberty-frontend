@@ -9,9 +9,11 @@ public class BESExampleTest {
 
 	@Test
 	public void applicanApprovalStatus() {
+		
+		//Instantiate a new applicant
 		Applicant applicant = new Applicant();
 
-		// Assert
+		// Assert the new Applicant is approved by default
 		assertTrue("Applicant is Approved", applicant.isApproved());
 	}
 
