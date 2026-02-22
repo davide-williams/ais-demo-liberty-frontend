@@ -80,10 +80,10 @@ pipeline {
                 '''*/
                 //Run Trivy against new image
                 sh '''
-                	podman save --output ${APP_IMAGE}:${BUILD_NUMBER}.tar ${APP_IMAGE}:${BUILD_NUMBER}
+                	podman save --output ${APP_IMAGE}.${BUILD_NUMBER}.tar ${APP_IMAGE}:${BUILD_NUMBER}
                 	ls -l
                  	trivy image --input ${APP_IMAGE}:${BUILD_NUMBER}.tar --format template --template "@/usr/local/share/html.tpl"
-                	rm -rf ${APP_IMAGE}:${BUILD_NUMBER}.tar 
+                	rm -rf ${APP_IMAGE}.${BUILD_NUMBER}.tar 
                 '''
                 // Publish the HTML report (requires the Jenkins publishHTML plugin)
                 publishHTML(target: [
