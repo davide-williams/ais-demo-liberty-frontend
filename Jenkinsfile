@@ -75,7 +75,7 @@ pipeline {
                 	podman save --output ${APP_NAME}.${BUILD_NUMBER}.tar ${APP_IMAGE}:${BUILD_NUMBER}         
                 	trivy plugin install scan2html
                 	
-                	trivy scan2html image -input ${APP_NAME}.${BUILD_NUMBER}.tar --scan2html-flags --output trivy3-report.html
+                	trivy scan2html image --input ${APP_NAME}.${BUILD_NUMBER}.tar --scan2html-flags --output trivy3-report.html
                 	
                 	trivy plugin uninstall scan2html          
                   
