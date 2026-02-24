@@ -75,7 +75,7 @@ pipeline {
         
         			mkdir -p report
                     
-                    trivy image --input ${APP_NAME}.${BUILD_NUMBER}.tar --format template --template "@myhtml.tpl" --output trivy-report/${APP_NAME}.${BUILD_NUMBER}-report.html
+                    trivy image --scanners vuln,misconfig,secret --input ${APP_NAME}.${BUILD_NUMBER}.tar --format template --template "@myhtml.tpl" --output trivy-report/${APP_NAME}.${BUILD_NUMBER}-report.html
                   
                 	rm -rf ${APP_NAME}.${BUILD_NUMBER}.tar
                 	
