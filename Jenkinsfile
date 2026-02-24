@@ -75,7 +75,7 @@ pipeline {
         
         			mkdir report
                     
-                    trivy image --input ${APP_NAME}.${BUILD_NUMBER}.tar --format template --template "@/usr/local/share/html.tpl" --output report/${APP_NAME}.${BUILD_NUMBER}-report.html
+                    trivy image --input ${APP_NAME}.${BUILD_NUMBER}.tar --format template --template "@/usr/local/share/myhtml.tpl" --output report/${APP_NAME}.${BUILD_NUMBER}-report.html
                   
                 	rm -rf ${APP_NAME}.${BUILD_NUMBER}.tar
                 	
