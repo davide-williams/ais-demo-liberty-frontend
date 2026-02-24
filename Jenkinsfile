@@ -73,7 +73,7 @@ pipeline {
                 	
                 	podman save --output ${APP_NAME}.${BUILD_NUMBER}.tar ${APP_IMAGE}:${BUILD_NUMBER}         
         
-        			mkdir report
+        			mkdir -p report
                     
                     trivy image --input ${APP_NAME}.${BUILD_NUMBER}.tar --format template --template "@/usr/local/share/myhtml.tpl" --output report/${APP_NAME}.${BUILD_NUMBER}-report.html
                   
