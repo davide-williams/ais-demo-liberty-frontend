@@ -69,11 +69,16 @@ pipeline {
      stage('Image Security Scan (Aquasec/Trivy)') {
             steps {
                 // Run Trivy as a Docker container to scan the built image
-                // 
+                // trivy image --input ${APP_NAME}.${BUILD_NUMBER}.tar --format template --template "@/usr/local/share/html.tpl" --output trivy3-report.html
                 sh '''
                 	
-                	podman save --output ${APP_NAME}.${BUILD_NUMBER}.tar ${APP_IMAGE}:${BUILD_NUMBER}                   
-                    trivy image --input ${APP_NAME}.${BUILD_NUMBER}.tar --format template --template "@/usr/local/share/html.tpl" --output trivy3-report.html
+                	podman save --output ${APP_NAME}.${BUILD_NUMBER}.tar ${APP_IMAGE}:${BUILD_NUMBER}         
+                	trivy plugin install scan2html
+                	
+                	trivy scan2html image -input ${APP_NAME}.${BUILD_NUMBER}.tar --scan2html-flags --output trivy3-report.html
+                	
+                	trivy plugin uninstall scan2html          
+                  
                 	rm -rf ${APP_NAME}.${BUILD_NUMBER}.tar
                 	
                 '''
@@ -84,7 +89,7 @@ pipeline {
         		  keepAll: true,
         		  reportDir: ".",
       		  	  reportFiles: "trivy3-report.html",
-      		   	 reportName: "Trivy Report",
+      		   	  reportName: "TrivyReport",
      		   ])
             }
         }
