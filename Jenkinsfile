@@ -75,7 +75,7 @@ pipeline {
         
         			mkdir -p report
                     
-                    trivy image --input ${APP_NAME}.${BUILD_NUMBER}.tar --format template --template "@/usr/local/share/myhtml.tpl" --output report/${APP_NAME}.${BUILD_NUMBER}-report.html
+                    trivy image --input ${APP_NAME}.${BUILD_NUMBER}.tar --format template --template "@myhtml.tpl" --output trivy-report/${APP_NAME}.${BUILD_NUMBER}-report.html
                   
                 	rm -rf ${APP_NAME}.${BUILD_NUMBER}.tar
                 	
@@ -85,19 +85,14 @@ pipeline {
          		  allowMissing: true,
          		  alwaysLinkToLastBuild: false,
         		  keepAll: true,
-        		  reportDir: ".",
-      		  	  reportFiles: "report/${APP_NAME}.${BUILD_NUMBER}-report.html",
+        		  reportDir: "trivy-report",
+      		  	  reportFiles: "${APP_NAME}.${BUILD_NUMBER}-report.html",
       		   	  reportName: "Aquasec/Trivy Report",
      		   ])
             }
         }
     
-    
-    
-    
-    
-    
-    
+     
     stage('Authenticate to Internal OCP Registry'){
         steps{
             echo 'Authenticating to Openshift Registry'
