@@ -74,7 +74,7 @@ pipeline {
                 	trivy plugin install scan2html
                 	podman save --output ${APP_NAME}.${BUILD_NUMBER}.tar ${APP_IMAGE}:${BUILD_NUMBER}
                    
-                    trivy scan2html image --input ${APP_NAME}.${BUILD_NUMBER}.tar --scan2html-flags --output interactive-report.html
+                    trivy scan2html image --input ${APP_NAME}.${BUILD_NUMBER}.tar --scan2html-flags --output trivy-report.html
                 	rm -rf ${APP_NAME}.${BUILD_NUMBER}.tar
                 	trivy plugin uninstall scan2html
                 '''
@@ -82,7 +82,7 @@ pipeline {
                 publishHTML(target: [
                     reportName: 'Aquasec/Trivy Scan Report',
                     reportDir: '.',
-                    reportFiles: 'interactive-report.html',
+                    reportFiles: 'trivy-report.html',
                     alwaysLinkToLastBuild: true,
                     keepAll: true
                 ])
