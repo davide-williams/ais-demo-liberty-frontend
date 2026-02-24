@@ -69,22 +69,14 @@ pipeline {
      stage('Image Security Scan (Aquasec/Trivy)') {
             steps {
                 // Run Trivy as a Docker container to scan the built image
-             /*   sh '''
-                    docker run --rm \\
-                      -v /var/run/docker.sock:/var/run/docker.sock \\
-                      -v ${WORKSPACE}:/output \\
-                      aquasec/trivy:latest image \\
-                      --format template \\
-                      --template "@/contrib/html.tpl" \\
-                      --output /output/trivy-report.html \\
-                      myapp:${BUILD_NUMBER}
-                '''*/
-                //Run Trivy against new image
-                //	
+                // trivy image --input ${APP_NAME}.${BUILD_NUMBER}.tar --format template --template "@/usr/local/share/html.tpl" --output trivy-report.html
                 sh '''
+                	trivy plugin install scan2html
                 	podman save --output ${APP_NAME}.${BUILD_NUMBER}.tar ${APP_IMAGE}:${BUILD_NUMBER}
-                    trivy image --input ${APP_NAME}.${BUILD_NUMBER}.tar --format template --template "@/usr/local/share/html.tpl" --output trivy-report.html
+                   
+                    trivy scan2html image --input ${APP_NAME}.${BUILD_NUMBER}.tar --scan2html-flags --output trivy-report.html
                 	rm -rf ${APP_NAME}.${BUILD_NUMBER}.tar
+                	trivy plugin uninstall scan2html
                 '''
                 // Publish the HTML report (requires the Jenkins publishHTML plugin)
                 publishHTML(target: [
