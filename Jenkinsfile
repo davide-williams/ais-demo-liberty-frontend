@@ -73,7 +73,7 @@ pipeline {
                 sh '''
                 	
                 	podman save --output ${APP_NAME}.${BUILD_NUMBER}.tar ${APP_IMAGE}:${BUILD_NUMBER}                   
-                    trivy image --input ${APP_NAME}.${BUILD_NUMBER}.tar --format template --template "@/usr/local/share/html.tpl" --output trivy-report.html
+                    trivy image --input ${APP_NAME}.${BUILD_NUMBER}.tar --format template --template "@/usr/local/share/html.tpl" --output trivy3-report.html
                 	rm -rf ${APP_NAME}.${BUILD_NUMBER}.tar
                 	
                 '''
@@ -83,7 +83,7 @@ pipeline {
          		  alwaysLinkToLastBuild: false,
         		  keepAll: true,
         		  reportDir: ".",
-      		  	  reportFiles: "trivy-report.html",
+      		  	  reportFiles: "trivy3-report.html",
       		   	 reportName: "Trivy Report",
      		   ])
             }
