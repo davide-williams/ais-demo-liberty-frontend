@@ -75,7 +75,7 @@ pipeline {
                 	podman save --output ${APP_NAME}.${BUILD_NUMBER}.tar ${APP_IMAGE}:${BUILD_NUMBER}         
                 	trivy plugin install scan2html
                 	
-                	trivy scan2html image --input ${APP_NAME}.${BUILD_NUMBER}.tar --scan2html-flags --output trivy3-report.html
+                	trivy scan2html image --input ${APP_NAME}.${BUILD_NUMBER}.tar --scan2html-flags --output report.html
                 	
                 	trivy plugin uninstall scan2html          
                   
@@ -88,7 +88,7 @@ pipeline {
          		  alwaysLinkToLastBuild: false,
         		  keepAll: true,
         		  reportDir: ".",
-      		  	  reportFiles: "trivy3-report.html",
+      		  	  reportFiles: "report.html",
       		   	  reportName: "TrivyReport",
      		   ])
             }
